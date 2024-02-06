@@ -48,7 +48,11 @@
           20); // 每隔20毫秒打印一个字符
       }
       var xhr = new XMLHttpRequest();
+      var api_url = document.getElementById("api_url").value;
       var url = "https://api.openai.com/v1/chat/completions";
+      if (api_url != "") {
+        url = api_url.replace(/\/+$/, '') + '/' + "v1/chat/completions".replace(/^\/+/, '');
+      }
       xhr.open("POST", url, true);
       xhr.setRequestHeader("Content-Type", "application/json");
       var auth = "Bearer " + document.getElementById("api_key").value;
@@ -117,6 +121,11 @@
       <h4>与Ai对话，请描述您的需求-支持中文、英语、日本语等</h4>
       <h3>此网站搭建教程</h3>
       <p>https://cloud.tencent.com/developer/article/2192663</p>
+      <div>
+        <textarea class="form-control" id="api_url" placeholder="输入你的代理地址（不输入就是官网）" rows="1" resize="none"
+          style="width: 50%; margin: 0 auto; background-color: #f4f4f4; color: #333; border: 1px solid #ccc; border-radius: 12px;"
+          placeholder="例如：http://1.2.3.4:3000/"></textarea>
+      </div>
       <div>
         <textarea class="form-control" id="api_key" placeholder="输入你的OpenAI API Key" rows="1" resize="none"
           style="width: 50%; margin: 0 auto; background-color: #f4f4f4; color: #333; border: 1px solid #ccc; border-radius: 12px;"></textarea>
